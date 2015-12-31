@@ -1,6 +1,7 @@
 package com.ne5t.app;
 
 import com.ne5t.app.crawler.Crawler;
+import com.ne5t.app.pagefetcher.PageFetcher;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,9 @@ public class CrawlerController {
      *  a list of the unique urls already visited
      *  a list of urls found by the crawler and not yet
      * visited
+     * @param maxPagesToVisit - the maximum number of pages to be visited
+     *  by the crawler
+     * @param startingPageUlr - the url at which the crawler begins
      */
     public CrawlerController(int maxPagesToVisit, String startingPageUrl) {
         this.maxPagesToVisit = maxPagesToVisit;
@@ -36,9 +40,15 @@ public class CrawlerController {
      * of pages has not been reached
      */
     private void runCrawler() {
-        
-        while (pagesVisited.size() < maxPagesToVisit && !pagesTiVisit.isEmpty()) {
+        String nextPage;
+
+        while (pagesVisited.size() < maxPagesToVisit && !pagesToVisit.isEmpty()) {
+            nextPage = pagesToVisit.remove(0);
             
+            if (!pagesVisited.contains(nextPage)) {
+                
+                pagesVisited.add(nextPage);
+            }
         }
     }
 

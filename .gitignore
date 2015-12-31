@@ -1,3 +1,4 @@
 target/
 javadocs/*
 logs/
+*.swp
